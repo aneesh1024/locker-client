@@ -52,7 +52,7 @@ function App() {
       return;
     }
     setLoading(true);
-    const res = await fetch("http://localhost:5000/add", {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/add`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -60,6 +60,8 @@ function App() {
       },
       body: JSON.stringify({ note: note }),
     });
+    const data = await res.json();
+    console.log(data);
     if (res.ok) {
       getAllNotes();
       setNote("");
@@ -69,7 +71,7 @@ function App() {
 
   const getAllNotes = async () => {
     // setLoading(true);
-    const res = await fetch("http://localhost:5000/getall", {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/getall`, {
       headers: {
         Authorization: `Bearer ${import.meta.env.VITE_APP_PASSWORD}`,
       },
@@ -85,7 +87,7 @@ function App() {
 
   const deleteNote = async (id: string) => {
     // setLoading(true);
-    const res = await fetch(`http://localhost:5000/delete/${id}`, {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/delete/${id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${import.meta.env.VITE_APP_PASSWORD}`,
@@ -146,7 +148,7 @@ function App() {
       <div className="absolute -top-[80px] -left-[100px] hidden sm:block">
         <img src={Notepad} alt="notepad" className="w-[90%]" />
       </div>
-      <main className="py-20 flex flex-col gap-10">
+      <main className="py-10 flex flex-col gap-10">
         <div className="w-[95%] sm:w-3/5 mx-auto flex gap-4 flex-col sm:flex-row">
           <input
             type="text"
@@ -175,7 +177,7 @@ function App() {
         <div className="w-[95%] sm:w-3/5 mx-auto sm:gap-3">
           {!initialLoading ? (
             noteList.length > 0 ? (
-              <div className="grid grid-cols-2 gap-5 sm:flex sm:flex-col w-[95%] sm:w-3/5 mx-auto sm:gap-3">
+              <div className="grid grid-cols-2 gap-5 sm:flex sm:flex-col w-full mx-auto sm:gap-3">
                 {noteList.map((note, index) => {
                   return (
                     <div
@@ -222,11 +224,11 @@ function App() {
               </div>
             )
           ) : (
-            <div className="grid grid-cols-2 gap-5 sm:flex sm:flex-col w-[95%] sm:w-3/5 mx-auto sm:gap-3">
-              <div className="h-28 w-full bg-gradient-to-r animate-pulse from-slate-400 to-zinc-600 rounded-lg"></div>
-              <div className="h-28 w-full bg-gradient-to-r animate-pulse from-slate-400 to-zinc-600 rounded-lg"></div>
-              <div className="h-28 w-full bg-gradient-to-r animate-pulse from-slate-400 to-zinc-600 rounded-lg"></div>
-              <div className="h-28 w-full bg-gradient-to-r animate-pulse from-slate-400 to-zinc-600 rounded-lg"></div>
+            <div className="grid grid-cols-2 gap-5 sm:flex sm:flex-col w-full mx-auto sm:gap-3">
+              <div className="h-28 sm:h-16 w-full bg-gradient-to-r animate-pulse from-slate-400 to-zinc-600 rounded-lg"></div>
+              <div className="h-28 sm:h-16 w-full bg-gradient-to-r animate-pulse from-slate-400 to-zinc-600 rounded-lg"></div>
+              <div className="h-28 sm:h-16 w-full bg-gradient-to-r animate-pulse from-slate-400 to-zinc-600 rounded-lg"></div>
+              <div className="h-28 sm:h-16 w-full bg-gradient-to-r animate-pulse from-slate-400 to-zinc-600 rounded-lg"></div>
             </div>
           )}
         </div>

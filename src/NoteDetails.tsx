@@ -29,7 +29,7 @@ const NoteDetails = () => {
 
   useEffect(() => {
     const fetchNote = async () => {
-      const res = await fetch(`http://localhost:5000/note/${id}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/note/${id}`, {
         headers: {
           Authorization: `Bearer ${import.meta.env.VITE_APP_PASSWORD}`,
         },
