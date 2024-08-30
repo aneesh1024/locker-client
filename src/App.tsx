@@ -103,8 +103,6 @@ function App() {
   };
 
   useEffect(() => {
-    console.log(import.meta.env.VITE_APP_PASSWORD);
-    console.log(import.meta.env.VITE_API_URL);
     const storedPassword: string | null = localStorage.getItem("password");
     if (storedPassword === import.meta.env.VITE_APP_PASSWORD) {
       setIsAuthenticated(true);
