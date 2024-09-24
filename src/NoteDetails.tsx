@@ -54,11 +54,11 @@ const NoteDetails = () => {
         className="w-[95%] sm:w-[50%] h-[75%] bg-slate-800 p-10 bg-opacity-90 rounded-lg text-white relative"
       >
         {note ? (
-          <div className="flex flex-col gap-4">
+          <div className="flex w-[90%] flex-col items-start gap-4">
             <small className="text-slate-400">
               {parseDate(note.createdAt)[0]} • {parseDate(note.createdAt)[1]}
             </small>
-            <div className="text-xl">{note.content}</div>
+            <div className="text-xl break-all">{note.content}</div>
           </div>
         ) : (
           <div className="flex flex-col gap-4">
